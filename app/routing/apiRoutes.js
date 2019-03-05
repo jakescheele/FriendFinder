@@ -31,7 +31,7 @@ module.exports = function (app) {
     })
 
     // ====================
-    // COMPATIBILITY LOGIC
+    // COMPATIBILITY LOGIC (had to comment a lot  out to  fix)
 
     let lowestDifference = 0;
     let mostCompatible = '';
@@ -41,12 +41,13 @@ module.exports = function (app) {
         // loop through scores
         for (e in friendsData[i].scores) {
 
-            // line below broke server
+            // (had to comment lines below out to fix server last minute)
+
             // let q = document.getElementById('q', (e++))
 
             // compare selected value to other user's choice
-            difference = Math.abs(q.options[q.selectedIndex].value - friendsData[i].scores[e])
-            totalDifference += difference
+            // difference = Math.abs(q.options[q.selectedIndex].value - friendsData[i].scores[e])
+            // totalDifference += difference
         }
         if (totalDifference < lowestDifference) {
             lowestDifference = totalDifference
