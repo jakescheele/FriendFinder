@@ -6,7 +6,7 @@ var express = require('express')
 // Initialiaze express
 var app = express();
 // Set up Port
-var PORT = process.env.PORT
+var PORT = process.env.PORT || 3000
 // Set up express data parsing
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
