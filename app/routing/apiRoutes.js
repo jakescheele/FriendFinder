@@ -40,7 +40,10 @@ module.exports = function (app) {
         let totalDifference = 0
         // loop through scores
         for (e in friendsData[i].scores) {
-            let q = document.getElementById('q', (e++))
+
+            // line below broke server
+            // let q = document.getElementById('q', (e++))
+
             // compare selected value to other user's choice
             difference = Math.abs(q.options[q.selectedIndex].value - friendsData[i].scores[e])
             totalDifference += difference
