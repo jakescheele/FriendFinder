@@ -1,29 +1,58 @@
 // ==================================
-// Dependencies
+
+//      DEPENDENCIES
 
 var path = require('path')
 
 // ==================================
-// Load Data
+
+//      LOAD DATA
 
 var friendsData = require('../data/friends');
 
 // ==================================
-// Routing
 
-module.exports = function(app) {
+//      ROUTING
+
+module.exports = function (app) {
+
+    // GET ROUTES
+
+    app.get('/api/friends', function (req, res) {
+        res.json(friendsData);
+    })
 
 
-app.get('/api/friends', function(req, res) {
-    res.json(friendsData);
-})
+    // POST ROUTES 
 
+    app.post('/api/friends', function (req, res) {
+        console.log(req)
+        friendsData.push(req.body)
+    })
 
-//    * A POST routes `/api/friends`. 
-// This will be used to handle incoming survey results. This route will also be used to handle the compatibility logic.
-app.post('/api/friends', function(req, res){
-    friendsData.push(req.body)
-})
+    // ====================
+    // COMPATIBILITY LOGIC
+
+    let lowestDifference = 0;
+    let mostCompatible = '';
+    // loop through friendsData
+    for (i in friendsData) {
+        let totalDifference = 0
+        // loop through scores
+        for (e in friendsData[i].scores) {
+            let q = document.getElementById('q', (e++))
+            // compare selected value to other user's choice
+            difference = Math.abs(q.options[q.selectedIndex].value - friendsData[i].scores[e])
+            totalDifference += difference
+        }
+        if (totalDifference < lowestDifference) {
+            lowestDifference = totalDifference
+            mostCompatible = friendsData[i].name
+        }
+    }
+
+    console.log(mostCompatible)
+
 
 
 }
